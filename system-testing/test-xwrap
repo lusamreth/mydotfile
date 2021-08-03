@@ -1,0 +1,90 @@
+#!/bin/bash
+
+p="$HOME/migration/hibike-running.gif"
+p0="$HOME/Downloads/girl-sat-down-raining.gif"
+p1="$HOME/Downloads/cute.mp4"
+p2="$HOME/Downloads/vicecity.gif"
+#adv="$HOME/Downloads/water.gif"
+adv="$HOME/Downloads/pixeltree.mp4"
+
+#wallpaper / gif
+supported_extension=("jpg" "jpeg" "gif")
+#working video
+video_extension=("mp4" "mpv")
+#convt_exts=()
+declare -A convt_exts
+
+
+get_exts(){
+    supported_extension=( "${supported_extension[@]}" "${video_extension[@]}")
+    len=${#supported_extension[@]}
+    for ((i=0;i<$len;i++));
+        do
+            convt_exts[$i]="*.${supported_extension[$i]}"
+        done
+    
+    echo $len
+    echo "debug"
+    echo "${convt_exts[*]}"
+    echo "enddebug"
+}
+
+get_exts
+
+migrate_media(){
+
+    base="$HOME/Downloads"
+    pathlist=()
+    target=$1
+    fulltarget=$2
+
+    p="${convt_exts[0]}" 
+    len=${#convt_exts[@]}
+    # output of arg=" -name '*.jpg' -o -name '*.jpeg' -o -name '*.gif'-print0"
+    arg="$base "
+
+    #first set the arg without clause -o
+    arg+="-name '${convt_exts[0]}' "
+    for((i=1;i<$len;i++));
+        do 
+            arg+="-o -name "${convt_exts[$i]}" "
+            echo "-> $arg \n";
+        done;
+    arg+="-print0"
+
+    mapfile -d $'\0' pathlist < <(find $arg)
+
+    if $fulltarget == true 
+        #mv the entire payload
+        then mv ${pathlist[*]} $target
+    else
+        #echo "damn"
+        #echo ${pathlist[*]}
+        cp ${pathlist[*]} "$target"
+    fi
+}
+
+migrate_media $HOME/migration/ false
+
+run_mpv_bg() {
+    #arguments
+    path=$1 
+
+    nice xwinwrap -b -s -fs -st -sp -nf -ni -ov -fdt -- \
+    mpv -wid WID --loop=inf --really-quiet --framedrop=vo --no-audio \
+    --panscan="1.0" $path
+}
+
+
+if pgrep -x "mpv" || pgrep -x "xwinwrap"
+    echo "Killing the mpv process!"
+    killall mpv
+    then nitrogen --restore &
+else 
+    #run_mpv_bg "$HOME/migration/hibike-running.gif"
+    run_mpv_bg $p2
+fi
+
+echo "switch from wallpaper to vid!"
+
+

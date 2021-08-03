@@ -1,0 +1,3 @@
+#!/bin/bash
+PID=$(pidof polybar)
+echo "cmd:toggle" > "/tmp/polybar_mqueue.${PID}"

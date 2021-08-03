@@ -1,0 +1,62 @@
+# Inserts a blank line between shell prompts
+add_newline = true
+scan_timeout = 100
+command_timeout = 1000
+
+#format = """
+#[┌───────────────────>](bold green)
+#[│](bold green)$directory$rust$package
+#[└─>](bold green) """
+#format = "[->/](bold bg:blue)"
+
+[git_branch]
+symbol = " "
+truncation_length = 4
+truncation_symbol = ""
+
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = "hell "
+
+[git_status]
+conflicted = "🏳"
+ahead = ""
+behind = ""
+diverged = ""
+untracked = "?"
+stashed = "<f552>"
+modified = ""
+staged = ""
+renamed = ""
+deleted = ""
+
+
+[rust]
+format = "[⚙️ $version](brown bold)"
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+
+success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+[lua]
+symbol = "🌕"
+format = "[$symbol](bold blue)[$version ](bold blue)"
+
+[memory_usage]
+disabled = false
+threshold = -1
+format="$symbol [$ram]($style)"
+symbol = "[](white bold )"
+style = "bg:blue bold dimmed green"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+# configure directory
+[directory]
+truncation_length = 10
+truncate_to_repo = true # truncates directory to root folder if in github repo
+style = "bold italic #87A752"

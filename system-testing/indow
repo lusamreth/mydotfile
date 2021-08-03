@@ -1,0 +1,39 @@
+#!/bin/bash
+
+echo $CurrentId
+
+function get_active_window() {
+    active_win=$(xdotool getactivewindow | xargs xwininfo -id | awk '{print $4}')
+    id=$(echo $active_win | awk '{print $1}')
+    echo $id
+    #$1 = $id
+}
+
+get_active_window
+CurrentId=$(get_active_window)
+if [[ ! -f /tmp/toggle_spot ]]; then
+    echo "head" >> /tmp/toggle_spot
+fi
+
+sed -i "1c$CurrentId" /tmp/toggle_spot
+state="$(sed -n "2p" /tmp/toggle_spot)"
+echo $state
+if [ -z $state ]; then
+    echo "empty"
+    cat > /tmp/toggle_spot << EOL $CurrentId\n true 
+EOL
+fi
+
+
+case $state in
+    "true")
+        echo "open true"
+        #sed -i '2cfalse' /tmp/toggle_spot;;
+        sed -i "2cfalse" /tmp/toggle_spot;;
+    "false")
+        echo "close"
+        sed -i '2ctrue' /tmp/toggle_spot;;
+esac
+
+#echo "openfile"
+#cat /tmp/toggle_spot

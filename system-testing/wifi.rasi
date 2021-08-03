@@ -1,0 +1,63 @@
+/*
+    padding:1.25%;
+    margin:0.75%;
+*/
+configuration {
+    font : "Papirus 15";
+    hide-scrollbar: true;
+    show-icons : true;
+    icon-theme : "Papirus";
+    hide-scrollbar : true;
+}
+@import "nordic.rasi"
+
+
+prompt {
+    /*background-color:@background-alt;*/
+    enabled:false;
+}
+
+inputbar {
+/*background-color :  #00000000;*/
+   /* background-color:#ff0000; */
+    background-color:@background;
+    position:center;
+    border-raduis:5px;
+    padding:1%;
+    expand:false;
+    border:0% 0% 0% 0%;
+    children:[entry];
+}
+
+
+entry {
+    background-color:               @background-alt;
+    text-color:                     @foreground;
+    placeholder-color:              @foreground;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "Password";
+    padding:1%;
+    blink:                          true;
+}
+
+element {
+    padding:1%;
+    margin:0 1%;
+}
+
+element selected {
+    background-color:               @background;
+    text-color:                     @foreground;
+    border:                  		1px;
+    border-radius:                  100%;
+}
+
+mainbox {
+    margin:0 0 10px 0;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @foreground;
+}

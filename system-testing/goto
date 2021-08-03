@@ -1,0 +1,36 @@
+#!/bin/bash
+AppClass=$1
+Command=$2
+Spotify="strat -r arch /opt/spotify/spotify"
+PREAPPLICATION=(
+"spotify:./spt-musc"
+"lightcord:lightcord"
+)
+
+function goto() {
+    #wmctrl -l | grep $1 | awk '{print $1}' | xargs -t wmctrl -s {}
+    app=$1
+    echo "this is $2"
+    if [[ -z $2 ]] 
+        then wmctrl -x -a $app || exec $1
+    else
+        wmctrl -x -a $app || exec $2
+    fi
+}
+
+function Runner() {
+    for ((i=0;i<${#PREAPPLICATION[@]};i++)){
+        IFS=$':' read -ra buff e <<< ${PREAPPLICATION[i]}
+        echo ${buff[1]}
+        if [[ $AppClass = ${buff[0]} ]]
+            then goto ${buff[0]} "${buff[1]}"
+            return
+        else
+            echo "sad"
+        fi
+    }
+
+    goto $AppClass $Command
+}
+
+Runner

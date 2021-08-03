@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ $1 = "--test" ]
+    then
+    polybar test --config=/mnt/coding/system-testing/test-polybar.conf
+fi
+
+
+if [ $1 = "--anime" ]
+    then polybar example --config=/mnt/coding/system-testing/anotherpolybar
+fi
+

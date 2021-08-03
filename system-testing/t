@@ -1,0 +1,3 @@
+
+#!/bin/bash
+polybar test --config=/coding/system-testing/test-polybar

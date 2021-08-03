@@ -1,0 +1,37 @@
+#!/bin/bash
+strat -u void wmctrl -s 4
+assigned_workspace=4
+spot_running=$(pgrep "spotify")
+
+if [[ -n $spot_running ]]
+    then
+    wminfo=$(wmctrl -l -x | grep -i "spotify.spotify")
+    IFS=$' ' read -ra spos <<< $wminfo
+    spotify_pos=${spos[1]} 
+
+    if [[ $spotify_pos -ne  $assigned_workspace ]]
+        then id=${spos[0]}
+        echo $id
+        wmctrl -i -r $id -t $assigned_workspace
+    fi
+
+    echo "spotify is already running"
+else
+   #configure this in fish
+   LD_PRELOAD=/usr/local/lib/spotify-adblock.so strat -u arch /opt/spotify/spotify
+fi
+
+#function get_active_window() {
+#    active_win=$(xdotool getactivewindow | xargs xwininfo -id | awk '{print $4}')
+#    set -o noclobber
+#    id=$(echo $active_win | awk '{print $1}')
+#    echo "$id" >> /tmp/toggle_spot
+#}
+#
+#state=$(cat /tmp/toggle_spot)
+#if [ "$state" = 1 ];then 
+#    echo "open"
+#    echo 0 > /tmp/toggle_spot
+#else
+#    echo 1 > /tmp/toggle_spot
+#fi
