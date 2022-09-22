@@ -1,0 +1,27 @@
+#!/bin/bash
+
+export $(dbus-launch)
+
+addrs=($(ls ~/.var/app/))
+
+function dbus_launcher {
+    target_app=$1
+    for addr in ${addrs[@]}
+    do
+        IFS=. read -ra bruh <<< $addr
+        split=($(echo ${bruh[@]} | tr '[:upper:]' '[:lower:]'))
+        app_name=${split[2]}
+        echo $addr
+        if [[ $target_app == $app_name  ]] ; then 
+            echo "Currently Running $app_name"
+            flatpak run $addr
+        fi
+        #echo "hey"| tr '[:upper:]' '[:lower:]'
+        
+    done
+}
+
+first_arg=$1
+dbus_launcher $first_arg
+
+#flatpak run 
