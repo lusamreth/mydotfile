@@ -1,0 +1,38 @@
+[flags]
+rate = 1000
+temperature_type = "c"
+time_delta = 8000
+disable_click = false
+regex = false
+
+[colors]
+low_battery_color = "red"
+text_color = "#ffffff"
+border_color = "#ffffff"
+
+table_header_color="#ffffff"
+widget_title_color="#ffffff"
+graph_color="#79740e"
+selected_bg_color="#b16286"
+selected_text_color="#ebdbb2"
+
+[disk_filter]
+is_list_ignored = false
+list = ["/dev/sda"]
+regex = true
+case_sensitive = false
+whole_word = false
+
+[mount_filter]
+is_list_ignored = true
+list = ["/mnt/.*", "/"]
+regex = true
+case_sensitive = false
+whole_word = true
+
+
+# Gruvbox light
+#text_color = "#3c3836"
+#table_header_color="#282828"
+#border_color = "#282828"
+#widget_title_color="#076678"

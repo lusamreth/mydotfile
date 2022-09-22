@@ -1,0 +1,15 @@
+
+# 0x1080+[cover_width][cover_height]
+# All units are in pixel
+# example ; 0x1080+1000+-1000 means : 
+# resolution: 0x1080
+# cover_width : 1000 pixels (count from top)
+# cover_height : -1000 pixels (count from bottom)
+
+#bash hideit.sh --name "Polybar tray window" --region 0x1080+30+-50
+#bash hideit.sh --name "polybar-test_DP-2" --region 0x1080+30+-50
+
+bash hideit.sh --name "polybar-btray_DP-2" --region 0x1080+300++200
+
+
+

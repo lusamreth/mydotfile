@@ -1,0 +1,32 @@
+
+#exa (ls)
+#bat (cat)
+#zioxide (cd- with ranking-algorithm)
+#starship (shell)
+#fisher (fish-plugin manager)
+#delta (diff)
+#ripgrep (grep): rg
+#gitui (git tui for git management)
+#alacritty (fast terminal)
+#st (lightweight alternative to alacritty)
+# best tool for beautiful text : figlet , cowsay ,  cbonsai , lolcat
+# fortune  ; sow random quotes / text from database
+# spicetify: cli tool for customizing spotify and inject external extension 
+# dust (du) : disk analysis tool
+# tokei (cloc)
+# https://zaiste.net/posts/shell-commands-rust/
+if [ "$(command -v exa)" ]; then
+    unalias -m 'll'
+    unalias -m 'l'
+    unalias -m 'la'
+    unalias -m 'ls'
+
+    alias ls='exa -G  --color auto --icons -a -s type'
+    alias ll='exa -l --color always --icons -a -s type'
+fi
+
+
+
+
+
+
